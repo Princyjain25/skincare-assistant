@@ -1,0 +1,8 @@
+langchain
+langchain_community
+langchain_ollama
+faiss-cpu
+langchainhub
+python-dotenv
+tqdm
+unstructured
