@@ -55,7 +55,7 @@ The assistant can:
 2.  **Run the Script:**  
     In another terminal:
     ```bash
-    python simple_rag_tools_app.py
+    python skin_care_app.py
     ```
 
 3.  **Ask Questions:**  
