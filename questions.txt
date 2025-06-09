@@ -1,0 +1,32 @@
+🧪 Test Ingredient Checker
+"Is salicylic acid safe for sensitive skin?"
+"What are the risks of using retinol and vitamin C together?"
+"Check if niacinamide and lactic acid can be used in the same routine."
+
+💆 Test Routine Planner
+"Can you suggest a skincare routine for dry and sensitive skin?"
+"Give me a morning routine for oily skin under ₹1000."
+"What should a skincare routine look like for someone with acne-prone combination skin?"
+
+💸 Test Product Price Finder
+"Suggest some moisturizers for oily skin under ₹500."
+"Find affordable cleansers for dry skin."
+"Recommend a complete routine under ₹2000 for combination skin."
+
+🔁 Test Total Routine Cost
+"What’s the total cost of this routine: Cetaphil Cleanser, Neutrogena Moisturizer, and The Ordinary Niacinamide?"
+"Calculate the total price for a basic routine for dry skin."
+
+💱 Test Currency Converter
+"Convert £12 to INR."
+"How much is £25 in Indian rupees?"
+
+🔍 Test General DB Search
+"What are some common skin concerns for combination skin?"
+"Tell me about ingredients used for treating hyperpigmentation."
+"What are examples of skincare product categories?"
+
+🧠 Test RAG Context Only (No Tool Use)
+"What are the different skin types?"
+"Describe treatments for rosacea."
+"What are the symptoms of oily skin?"
