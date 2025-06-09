@@ -1,93 +1,76 @@
-# Simple Ollama RAG + Tools Example
+# Simple Skin Care Assistant (Ollama RAG + Tools Example)
 
-This application demonstrates a basic example of using a locally running Ollama Large Language Model (LLM) combined with Retrieval-Augmented Generation (RAG) and custom Tools, orchestrated by the LangChain framework.
+This application demonstrates a basic AI-powered skin care assistant using a locally running Ollama Large Language Model (LLM), Retrieval-Augmented Generation (RAG), and custom tools, all orchestrated by the LangChain framework.
 
 ## Overview
 
-The application allows you to interact with an AI agent that can:
-1.  **Answer questions based on provided documents:** It uses RAG to search through a small, predefined set of documents about "Project Alpha" and "Project Beta".
-2.  **Use custom tools:** It has access to tools that can retrieve the current date, current time, and calculate the number of days until a future date.
-3.  **Leverage a local LLM:** All language processing is done locally using Ollama and a specified model (e.g., `llama3:8b`).
+The assistant can:
+1.  **Answer skin care questions:** Uses RAG to search through a small set of skin care documents (e.g., routines, ingredients, tips).
+2.  **Use helpful tools:** Provides the current date, time, and calculates days until a future appointment or event.
+3.  **Run locally:** All AI processing is private and local using Ollama and a specified model (e.g., `llama3:8b`).
 
 ## Features
 
-*   **Local LLM:** Uses Ollama for local, private LLM inference.
-*   **RAG:** Implements basic RAG using in-memory FAISS vector store. Document context is retrieved *before* the agent is invoked and passed to it.
-*   **Tools:** Demonstrates integrating custom Python functions as tools for the agent.
-*   **Agent:** Utilizes a LangChain ReAct (Reasoning and Acting) agent. The agent is provided with RAG context and decides whether to use that context, its own knowledge, or one of the available tools to answer the user's query.
-*   **LangChain:** Built using the LangChain framework for component integration.
+*   **Local LLM:** Private, local inference with Ollama.
+*   **RAG:** Finds relevant info from your skin care documents before answering.
+*   **Tools:** Includes date, time, and countdown helpers.
+*   **Agent:** Uses LangChain's ReAct agent to combine knowledge, documents, and tools.
+*   **Simple Python app:** Easy to run and modify.
 
 ## Setup
 
+1.  **Install Ollama:**  
+    Download and install from https://ollama.com/.
 
-Follow these steps to set up and run the application:
-
-1.  **Install Ollama:**
-    If you haven't already, download and install Ollama from https://ollama.com/.
-
-2.  **Pull an Ollama Model:**
-    Open your terminal and pull the desired LLM. The script is configured for `llama3:8b` by default, but you can change the `OLLAMA_MODEL` variable in the script.
+2.  **Pull a Model:**  
     ```bash
     ollama pull llama3:8b
     ```
-    *(Optional: You can use other models like `llama3`, `mistral`, etc. Just make sure to update the `OLLAMA_MODEL` variable in `simple_rag_tools_app.py`)*
+    *(You can use other models if you prefer.)*
 
-3.  **Clone or Download the Code:**
-    Clone or Download - https://github.com/saurav-samantray/ollama-llm-rag-tools-example.git
-    Ensure you have the `simple_rag_tools_app.py` file in your workspace (e.g., `c:\workspace\ai-agent\ollama-llm-rag-tools-example\`).
-4.  **Create a Python Environment (Recommended):**
-    It's good practice to use a virtual environment.
+3.  **Get the Code:**  
+    Clone or download this repo and ensure `simple_rag_tools_app.py` is in your workspace.
+
+4.  **Create a Python Environment (Recommended):**  
     ```bash
-    cd c:\workspace\ai-agent\ollama-llm-rag-tools-example
     python -m venv venv
     .\venv\Scripts\activate  # On Windows
     # source venv/bin/activate # On Linux/macOS
     ```
 
-5.  **Install Python Dependencies:**
-    Install the required libraries using pip.
+5.  **Install Dependencies:**  
     ```bash
     pip install -r requirements.txt
     ```
-    *   `langchain`, `langchain_community`, `langchain_ollama`, `langchainhub`: Core LangChain components and Ollama integration.
-    *   `faiss-cpu`: Vector store library for RAG (CPU version).
-    *   `python-dotenv`: Optional, for loading environment variables if needed later.
+    *(Includes LangChain, Ollama integration, FAISS, etc.)*
 
-## Running the Application
+## Running the Assistant
 
-1.  **Start Ollama (if not already running):**
-    In *one* terminal, make sure the Ollama service is running. You can start it by running a model, which keeps the service active:
+1.  **Start Ollama:**  
     ```bash
     ollama run llama3:8b
     ```
     Keep this terminal open.
 
-2.  **Run the Python Script:**
-    In *another* terminal (where you activated your virtual environment), navigate to the project directory and run the script:
+2.  **Run the Script:**  
+    In another terminal:
     ```bash
-    cd c:\workspace\ai-agent\ollama-llm-rag-tools-example
     python simple_rag_tools_app.py
     ```
 
-3.  **Interact:**
-    The script will initialize the components and prompt you for input. Try asking questions like:
-    *   `What is Project Alpha about?`
-    *   `Tell me about Project Beta funding.`
+3.  **Ask Questions:**  
+    Try:
+    *   `What is a good morning skin care routine?`
+    *   `Tell me about niacinamide benefits.`
     *   `What is the date today?`
-    *   `What time is it?`
-    *   `When is the next meeting for Project Alpha and how many days are left until then?`
-    *   `Can you tell me about Project Alpha and also today's date?`
-    *   Type `quit` to exit.
+    *   `How many days until my next dermatologist appointment on July 15?`
+    *   `quit` to exit.
 
-    Observe the output with `verbose=True` to see the agent's thought process. Note how it first considers the RAG context provided to it, then decides if a tool is needed, processes the tool's input/output, and finally generates the response.
+    The assistant will use your skin care documents and tools to answer.
 
-## Next Steps & Exploration
+## Next Steps
 
-*   **More Documents:** Replace the simple `docs` list with loading documents from files (PDF, TXT, CSV) using LangChain's `DocumentLoader` classes.
-*   **Document Chunking Strategies:** Experiment with different text splitters and chunk sizes for more effective RAG.
-*   **Persistent Vector Store:** Instead of the in-memory FAISS, use a persistent vector store like ChromaDB or a cloud-based one.
-*   **More Sophisticated Tools:** Create tools that interact with APIs (weather, stocks, databases) or perform more complex calculations.
-*   **Different Agent Types:** Explore other LangChain agents (e.g., OpenAI Functions Agent if using OpenAI models, Conversational Agents).
-*   **Error Handling:** Add more robust error handling around tool execution and LLM calls.
-*   **Streaming:** Implement response streaming for a more interactive feel.
-*   **UI:** Build a simple web interface using Streamlit or Flask.
+*   **Add More Documents:** Load your own skin care guides, ingredient lists, or FAQs.
+*   **Customize Tools:** Add reminders, product lookup, or appointment scheduling.
+*   **Build a UI:** Try Streamlit or Flask for a simple web interface.
+
