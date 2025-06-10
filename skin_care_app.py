@@ -24,12 +24,7 @@ EMBED_MODEL = os.getenv("EMBED_MODEL", "all-minilm")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 DOCS_FOLDER = os.getenv("DOCS_FOLDER", "skin_data")
 RATE_GBP_TO_INR = float(os.getenv("RATE_GBP_TO_INR", "105.0"))
-# OLLAMA_MODEL = "orca-mini:3b"
-# # EMBED_MODEL = "all-minilm"  # Embedding model, can be the same as the chat model
-# EMBED_MODEL = "all-MiniLM-L6-v2"  # Alternative embedding model
-# OLLAMA_BASE_URL = "http://localhost:11434" 
-# DOCS_FOLDER = "skin_data"
-# RATE_GBP_TO_INR = 105.0
+
 
 # Mapping of CSV filenames to their respective fields for merging
 CSV_FIELD_MAP = {
@@ -130,14 +125,6 @@ converter_tool = CurrencyConverter(RATE_GBP_TO_INR)
 search_tool = SkincareSearchTool(llm, retriever)
 
 # --- 6. Collect tool methods ---
-# tools = [
-#     ingredient_tool.ingredient_checker,
-#     routine_tool.routine_planner,
-#     price_tool.suggest_products_by_price,
-#     price_tool.calculate_total_routine_price,
-#     converter_tool.convert_gbp_to_inr,
-#     search_tool.search_skincare_db,
-# ]
 tools = [
     Tool.from_function(
         func=ingredient_tool.ingredient_checker,
@@ -277,47 +264,4 @@ while True:
 
     except Exception as e:
         print(f"\nError occurred: {e}")
-
-
-# while True:
-#     try:
-#         user_input = input("\n🧑 You: ")
-#         if user_input.strip().lower() == 'quit':
-#             print("Skincare assistant signing off. Don’t forget your SPF!")
-#             break
-
-#         # Step 1: Retrieve relevant context using the vector retriever
-#         retrieved_docs = retriever.invoke(user_input)
-#         rag_context_str = "\n\n".join([doc.page_content for doc in retrieved_docs])
-
-#         if not rag_context_str.strip():
-#             rag_context_str = "No relevant documents found for this query."
-
-#         # Step 2: Run the agent executor with the user input and RAG context
-#         agent_input = {
-#             "input": user_input,
-#             "rag_context": rag_context_str,
-#         }
-
-#         print("\nAgent is thinking...")
-#         response = agent_executor.invoke(agent_input)
-
-#         try:
-#             answer = response.get("output", "").strip()
-#             if not answer:
-#                 raise ValueError("No output returned by agent.")
-#             # Step 3: Display final answer
-#             print("\nFinal Answer:\n" + answer)
-#         except Exception as e:
-#             print("\n⚠️ Agent could not format a clean output. Here's the raw response:\n", response)
-
-#         # # Step 3: Display final answer
-#         # print("\nFinal Answer:")
-#         # print(response['output'])
-
-#     except Exception as e:
-#         print(f"\nError occurred: {e}")
-
-# print("\nExiting application.")
-
 
